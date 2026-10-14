@@ -1,0 +1,7 @@
+# ROM dumps are binary: never convert line endings
+*.rom binary
+*.bin binary
+*.BIN binary
+2.14-15_dk/2.14 binary
+2.14-15_dk/2.15 binary
+*.png binary

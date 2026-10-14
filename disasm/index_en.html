@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Praktik PC BIOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Sans+Narrow:wght@700&display=swap">
+<style>
+/* Layout: single reading column (~75ch) with wide tables allowed to scroll; version cards in a responsive grid */
+:root{
+  --bg:#f3f2ec; --panel:#e9e7de; --fg:#1f2320; --muted:#646a62; --rule:#d2cfc3;
+  --accent:#8a4b08; --link:#22566b; --ok:#2f6b2a; --bad:#9b2c1f; --dup:#6d5f86;
+  --warn:#a3200f; --warnbg:#f8e3dc;
+  --f-code:"PT Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --f-body:"PT Sans", "Segoe UI", system-ui, sans-serif;
+  --f-disp:"PT Sans Narrow", "PT Sans", "Arial Narrow", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141814; --panel:#1b201b; --fg:#d8dccf; --muted:#8e978a; --rule:#2c332b;
+  --accent:#e2a24a; --link:#7fbfd4; --ok:#8cc77f; --bad:#ef8a78; --dup:#b7a6d9; --warn:#ff8f7a; --warnbg:#3a1a14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141814; --panel:#1b201b; --fg:#d8dccf; --muted:#8e978a; --rule:#2c332b;
+  --accent:#e2a24a; --link:#7fbfd4; --ok:#8cc77f; --bad:#ef8a78; --dup:#b7a6d9; --warn:#ff8f7a; --warnbg:#3a1a14; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0}
+a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-block:36px 72px;padding-inline:20px}
+.eyebrow{font-family:var(--f-code);font-size:13px;color:var(--accent);letter-spacing:.04em}
+h1{font-family:var(--f-disp);font-size:clamp(32px,5vw,48px);line-height:1.05;margin:8px 0 12px;text-wrap:balance}
+h2{font-family:var(--f-disp);font-size:24px;margin:44px 0 10px;border-bottom:2px solid var(--fg);padding-bottom:4px;text-wrap:balance}
+h3{font-family:var(--f-disp);font-size:19px;margin:24px 0 6px}
+p,li{max-width:75ch}
+.lede{font-size:18px;color:var(--muted);max-width:65ch;margin:0}
+code{font-family:var(--f-code);font-size:.9em;background:var(--panel);padding:0 3px;border-radius:2px}
+.lineage{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:22px 0 4px}
+.ver{flex:1 1 240px;min-width:0;border:1px solid var(--rule);background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.ver .tag{font-family:var(--f-code);font-size:12.5px;color:var(--muted)}
+.ver .name{font-family:var(--f-disp);font-size:22px;line-height:1.1}
+.ver p{margin:0;font-size:14.5px}
+.ver .links{margin-top:auto;display:flex;gap:14px;font-size:14px;flex-wrap:wrap}
+.ver .links a{font-weight:700}
+.arrow{align-self:center;font-family:var(--f-code);color:var(--muted)}
+@media (max-width:760px){.arrow{display:none}}
+.tw{overflow-x:auto;max-width:100%;margin:8px 0}
+table{border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid var(--rule);padding:5px 14px 5px 0;text-align:left;vertical-align:top}
+th{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.05em;font-size:12.5px;color:var(--muted)}
+td.m{font-family:var(--f-code);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:12px;padding:0 7px;border:1px solid currentColor;border-radius:9px;white-space:nowrap}
+.pill.ok{color:var(--ok)} .pill.dup{color:var(--dup)}
+.note{color:var(--muted);font-size:14px}
+.warn{border:2px solid var(--warn);background:var(--warnbg);color:var(--fg);padding:12px 16px;margin:16px 0 4px;max-width:75ch;font-size:15px;line-height:1.5}
+.warn strong{color:var(--warn)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">D:\prj_praktik · 3 BIOS versions · 16 KB each · x86 real mode · <a href="index.html" lang="uk">Українською</a></div>
+    <h1>Praktik PC BIOS</h1>
+    <p class="lede">Disassembly of every available BIOS version of the Soviet IBM-compatible Praktik computer, with a comment on every line and a version history.</p>
+    <div class="warn" role="note"><strong>Important.</strong> The Praktik motherboard power connector looks like the standard IBM PC 5.25-inch floppy drive power connector, BUT(!) its pinout does not match the standard one. Connecting a standard IBM PC power supply burns out the chips on the motherboard. Check the pinout before applying power.</div>
+  </header>
+
+  <section>
+    <h2>Versions</h2>
+    <div class="lineage">
+      <div class="ver">
+        <div class="tag">2.14-15_dk · CRC32 8F2C3569</div>
+        <div class="name">Factory, 1990</div>
+        <p>"MAGNIT" 1990. Peripheral emulator with a list of 25 ports, no COM port emulation. Cassette tape loader.</p>
+        <div class="links"><a href="praktik_bios_2.14-15_dk_en.html">Listing</a></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="ver">
+        <div class="tag">2.16-17_my · CRC32 187319F5</div>
+        <div class="name">C.S.T., 1992</div>
+        <p>Rework by Computer &amp; Soft Technol. 1024-entry port table, COM1/COM2 emulation, direct writes to the 6845. Main analysis with the architecture description.</p>
+        <div class="links"><a href="praktik_bios_2.16-17_en.html">Listing and architecture</a></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="ver">
+        <div class="tag">2.18-19_bios_new · CRC32 EBCC250C</div>
+        <div class="name">Network, 1992</div>
+        <p>The same C.S.T. version with the LANcom Network Remote Loader 1.2 instead of the cassette loader.</p>
+        <div class="links"><a href="praktik_bios_2.18-19_new_en.html">Listing</a></div>
+      </div>
+    </div>
+    <p class="note">Each version also has a plain-text <code>.asm</code> listing with the same comments. The version order is confirmed by code similarity: dk and 2.16-17 match by 87%, 2.16-17 and new by 84%, dk and new by only 71%.</p>
+  </section>
+
+  <section>
+    <h2>How the machine works</h2>
+    <p>All versions share one principle. The Praktik has no 8259 interrupt controller and no 8237 DMA controller. The other chips (8255, 8253, 6845, 765, 8250) are not on the standard IBM PC I/O ports but in a memory window at F000:0000–0FFF. A program's access to a standard port raises an NMI, and the handler in ROM carries it out in software. That is how ordinary IBM PC software runs on different hardware.</p>
+    <p>The 16 KB ROM image is visible at FC000–FFFFF and in a mirror at F4000–F7FFF. The first 8 KB run as segment F400: the peripheral emulator, the common interrupt handler INT 0Fh and the upper half of the font. The second 8 KB are an ordinary BIOS with IBM PC/XT entry points. The full register and port map is on the <a href="praktik_bios_2.16-17_en.html#overview">2.16-17 page</a>.</p>
+  </section>
+
+  <section>
+    <h2>What changed between versions</h2>
+    <h3>2.14-15_dk → 2.16-17</h3>
+    <ul>
+      <li>Port lookup in the NMI handler: dk scans a list of 25 ports with <code>repne scasw</code>; 2.16-17 uses a 1024-entry table and dispatches in one step.</li>
+      <li>Emulation of two 8250 serial ports (2F8–2FF, 3F8–3FF) and COM1/COM2 detection at boot were added. In dk the COM ports are never found and INT 14h returns immediately.</li>
+      <li>INT 10h AH=0 writes the 6845 registers directly to F000:0000/0002 instead of going through the emulated ports.</li>
+      <li>Joystick: hardware one-shots replaced by software axis simulation.</li>
+      <li>The beep and COM port detection moved to segment F400 and are called through the ROM mirror. Word-sized register writes in POST were fixed.</li>
+    </ul>
+    <h3>2.16-17 → 2.18-19_new</h3>
+    <ul>
+      <li>INT 18h runs the LANcom 1.2 network loader (F400:0C4F) instead of the tape loader. The network runs over the second 8250 (COM2) on a shared line. The file <code>\\SERVER\RLOAD\NETBOOT.@@@</code> is downloaded over SMB and mounted as RAM disk A:.</li>
+      <li>Pressing Del during the memory test starts network boot right away, bypassing the floppy drives.</li>
+      <li>The tape loader is still in ROM but unused. The model byte is changed to FDh.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Files in the folder</h2>
+    <p>Each 16 KB firmware is stored in two 8 KB chips: even bytes in one, odd bytes in the other. The numbers 2.14/2.15, 2.16/2.17, 2.18/2.19 are the chip reference designators on the board.</p>
+    <div class="tw"><table>
+      <tr><th>File</th><th>Size</th><th>CRC32</th><th>What it is</th></tr>
+      <tr><td class="m">2.14-15_dk/2.14-15_dk.rom</td><td class="m">16384</td><td class="m">8F2C3569</td><td>Version dk, full image</td></tr>
+      <tr><td class="m">2.14-15_dk/2.14 · 2.15</td><td class="m">8192 × 2</td><td class="m">2171C2D3 · 110E11EF</td><td>Even and odd chips of dk</td></tr>
+      <tr><td class="m">2.16-17_my/pr_bios.rom</td><td class="m">16384</td><td class="m">187319F5</td><td>Version 2.16-17, full image</td></tr>
+      <tr><td class="m">2.16-17_my/pr2.16.rom · pr2.17.rom</td><td class="m">8192 × 2</td><td class="m">2092066A · AE32A2B1</td><td>Even and odd chips of 2.16-17</td></tr>
+      <tr><td class="m">2.16-17_my/pr_fnt.bin</td><td class="m">2048</td><td class="m">86655A23</td><td>8×8 font, 256 CP866 characters, assembled from two parts of the ROM: F000:FA6E (00–7Fh) and F400:1C00 (80–FFh). The same in all versions.</td></tr>
+      <tr><td class="m">2.18-19_bios_new/pr_18-19.rom</td><td class="m">16384</td><td class="m">EBCC250C</td><td>Version new, full image</td></tr>
+      <tr><td class="m">2.18-19_bios_new/pr_18.BIN · pr_19.BIN</td><td class="m">8192 × 2</td><td class="m">86F03AA3 · F4E5ECA5</td><td>Even and odd chips of new</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Sources</h2>
+    <ul>
+      <li>The BIOS files were taken from the post «Журнал восстановления Практика» ("Praktik restoration log") on the zxdesu site, 2016: <a href="https://zxdesu.byethost32.com/2016/07/28/%d0%b6%d1%83%d1%80%d0%bd%d0%b0%d0%bb-%d0%b2%d0%be%d1%81%d1%81%d1%82%d0%b0%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d1%80%d0%b0%d0%ba%d1%82%d0%b8%d0%ba%d0%b0/">zxdesu.byethost32.com</a>.</li>
+      <li>Description of the Praktik computer (PK8641) on retro-computer.ru: <a href="https://retro-computer.ru/item/PRAKTIK-PK8641.html">retro-computer.ru/item/PRAKTIK-PK8641.html</a>.</li>
+    </ul>
+  </section>
+</div>
+</html>

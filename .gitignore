@@ -1,0 +1,6 @@
+# Damaged BIOS dumps are not part of the repository
+2.14-15_sb/2.14_bad.BIN
+2.16-17_unkn_bad/
+
+# 2.14-15_sb is an exact copy of 2.16-17_my, kept out of the repository
+2.14-15_sb/
