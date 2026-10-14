@@ -444,7 +444,7 @@ table.l td{padding:1px 8px 1px 0;vertical-align:top}
 <tr class="c"><td class="ad">F400:0270</td><td class="by">26A00004</td><td class="in">mov    al, byte es:[400h]</td><td class="cm">AL = записаний байт (парний порт → F000:0400)</td></tr>
 <tr class="c" id="aF4000274"><td class="ad">F400:0274</td><td class="by">26A20100</td><td class="in">mov    byte es:[1], al</td><td class="cm">Пишемо в порт A реального 8255 (у режимі 99h це вхід, запис без ефекту)</td></tr>
 <tr class="c" id="aF4000278"><td class="ad">F400:0278</td><td class="by">C3</td><td class="in">ret</td><td class="cm">Повернення</td></tr>
-<tr class="hdr"><td colspan="4"><div class="hb"><div class="ht">nmi_port_061 — порт B 8255 (F000:0003). Біт 6 (утримання такту клавіатури) в апаратурі</div><div>«Практика» інвертовано щодо IBM, тому під час читання й запису він інвертується.</div></div></td></tr>
+<tr class="hdr"><td colspan="4"><div class="hb"><div class="ht">nmi_port_061 — порт B 8255 (F000:0003). Біт 6 (утримання такту клавіатури) в апаратурі</div><div>ПЕОМ «Практик» інвертовано щодо IBM, тому під час читання й запису він інвертується.</div></div></td></tr>
 <tr class="lab" id="aF4000279"><td colspan="4"><span class="ln">nmi_port_061:</span> <span class="xr">← <a href="#aF4000113">0113</a></span></td></tr>
 <tr class="c"><td class="ad">F400:0279</td><td class="by">7508</td><td class="in">jne    <a href="#aF4000283">loc_0283</a></td><td class="cm">Запис — до виведення в порт B</td></tr>
 <tr class="c" id="aF400027B"><td class="ad">F400:027B</td><td class="by">26A00300</td><td class="in">mov    al, byte es:[3]</td><td class="cm">Читання: поточне значення порту B реального 8255</td></tr>
@@ -452,7 +452,7 @@ table.l td{padding:1px 8px 1px 0;vertical-align:top}
 <tr class="c" id="aF4000281"><td class="ad">F400:0281</td><td class="by">EB11</td><td class="in">jmp    <a href="#aF4000294">loc_0294</a></td><td class="cm">До спільного виходу (AL → результат IN)</td></tr>
 <tr class="lab" id="aF4000283"><td colspan="4"><span class="ln">loc_0283:</span> <span class="xr">← <a href="#aF4000279">0279</a></span></td></tr>
 <tr class="c"><td class="ad">F400:0283</td><td class="by">26A00104</td><td class="in">mov    al, byte es:[401h]</td><td class="cm">AL = записаний байт (непарний порт → F000:0401)</td></tr>
-<tr class="c" id="aF4000287"><td class="ad">F400:0287</td><td class="by">3440</td><td class="in">xor    al, 40h</td><td class="cm">Інвертуємо біт 6 (такт клавіатури) під апаратуру «Практика»</td></tr>
+<tr class="c" id="aF4000287"><td class="ad">F400:0287</td><td class="by">3440</td><td class="in">xor    al, 40h</td><td class="cm">Інвертуємо біт 6 (такт клавіатури) під апаратуру ПЕОМ «Практик»</td></tr>
 <tr class="c" id="aF4000289"><td class="ad">F400:0289</td><td class="by">26A20300</td><td class="in">mov    byte es:[3], al</td><td class="cm">Записуємо в порт B реального 8255 (динамік, gate каналу 2, керування клавіатурою)</td></tr>
 <tr class="c" id="aF400028D"><td class="ad">F400:028D</td><td class="by">C3</td><td class="in">ret</td><td class="cm">Повернення</td></tr>
 <tr class="hdr"><td colspan="4"><div class="hb"><div class="ht">nmi_port_062 — порт C 8255 (F000:0005): пряме відображення. Тут же спільний хвіст loc_06A8:</div><div>AL → результат IN.</div></div></td></tr>
@@ -1326,7 +1326,7 @@ table.l td{padding:1px 8px 1px 0;vertical-align:top}
 <tr class="c" id="aF000E3A5"><td class="ad">F000:E3A5</td><td class="by">72E6</td><td class="in">jb     <a href="#aF000E38D">loc_E38D</a></td><td class="cm">Ні — продовжуємо пошук</td></tr>
 <tr class="c" id="aF000E3A7"><td class="ad">F000:E3A7</td><td class="by">2BDB</td><td class="in">sub    bx, bx</td><td class="cm">BX = 0</td></tr>
 <tr class="c" id="aF000E3A9"><td class="ad">F000:E3A9</td><td class="by">BA00F6</td><td class="in">mov    dx, 0F600h</td><td class="cm">DX = F600h — сегмент ROM BASIC в IBM PC</td></tr>
-<tr class="c" id="aF000E3AC"><td class="ad">F000:E3AC</td><td class="by">8EDA</td><td class="in">mov    ds, dx</td><td class="cm">DS = F600h (у «Практика» тут, ймовірно, дзеркало власного ПЗП)</td></tr>
+<tr class="c" id="aF000E3AC"><td class="ad">F000:E3AC</td><td class="by">8EDA</td><td class="in">mov    ds, dx</td><td class="cm">DS = F600h (у ПЕОМ «Практик» тут, ймовірно, дзеркало власного ПЗП)</td></tr>
 <tr class="c" id="aF000E3AE"><td class="ad">F000:E3AE</td><td class="by">B90080</td><td class="in">mov    cx, 8000h</td><td class="cm">CX = 32 КБ для контрольної суми</td></tr>
 <tr class="c" id="aF000E3B1"><td class="ad">F000:E3B1</td><td class="by">813FE98F</td><td class="in">cmp    word [bx], 8FE9h</td><td class="cm">Перше слово = E9h 8Fh (JMP near — точка входу BASIC)?</td></tr>
 <tr class="c" id="aF000E3B5"><td class="ad">F000:E3B5</td><td class="by">7505</td><td class="in">jne    <a href="#aF000E3BC">loc_E3BC</a></td><td class="cm">Ні — BASIC відсутній</td></tr>
@@ -2551,7 +2551,7 @@ table.l td{padding:1px 8px 1px 0;vertical-align:top}
 <tr class="c"><td class="ad">F000:EDBD</td><td class="by">7408</td><td class="in">je     <a href="#aF000EDC7">loc_EDC7</a></td><td class="cm">відлік закінчено → далі</td></tr>
 <tr class="c" id="aF000EDBF"><td class="ad">F000:EDBF</td><td class="by">2BC9</td><td class="in">sub    cx, cx</td><td class="cm">CX = 0 → 65536 ітерацій</td></tr>
 <tr class="lab" id="aF000EDC1"><td colspan="4"><span class="ln">loc_EDC1:</span> <span class="xr">← <a href="#aF000EDC1">EDC1</a></span></td></tr>
-<tr class="c"><td class="ad">F000:EDC1</td><td class="by">E2FE</td><td class="in">loop   <a href="#aF000EDC1">loc_EDC1</a></td><td class="cm">порожній цикл ≈ 1/8 с (на частоті «Практика»)</td></tr>
+<tr class="c"><td class="ad">F000:EDC1</td><td class="by">E2FE</td><td class="in">loop   <a href="#aF000EDC1">loc_EDC1</a></td><td class="cm">порожній цикл ≈ 1/8 с (на частоті ПЕОМ «Практик»)</td></tr>
 <tr class="c" id="aF000EDC3"><td class="ad">F000:EDC3</td><td class="by">FECC</td><td class="in">dec    ah</td><td class="cm">наступна одиниця затримки</td></tr>
 <tr class="c" id="aF000EDC5"><td class="ad">F000:EDC5</td><td class="by">EBF6</td><td class="in">jmp    <a href="#aF000EDBD">loc_EDBD</a></td><td class="cm">повторити</td></tr>
 <tr class="lab" id="aF000EDC7"><td colspan="4"><span class="ln">loc_EDC7:</span> <span class="xr">← <a href="#aF000ED94">ED94</a> <a href="#aF000EDB3">EDB3</a> <a href="#aF000EDBD">EDBD</a></span></td></tr>
