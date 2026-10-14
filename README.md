@@ -1,5 +1,7 @@
 # Praktik PK8641 BIOS
 
+**English** | [Українська](README.uk.md)
+
 BIOS ROM dumps and a fully commented disassembly of the **Praktik** (PK8641), a Soviet IBM PC/XT-compatible personal computer made by the "Magnit" plant in 1990, with later BIOS versions by C.S.T. (Computer & Soft Technol.), 1992.
 
 > [!WARNING]
