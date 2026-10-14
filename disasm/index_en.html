@@ -90,7 +90,7 @@ td.m{font-family:var(--f-code);font-size:13px;white-space:nowrap;font-variant-nu
 
   <section>
     <h2>How the machine works</h2>
-    <p>All versions share one principle. The Praktik has no 8259 interrupt controller and no 8237 DMA controller. The other chips (8255, 8253, 6845, 765, 8250) are not on the standard IBM PC I/O ports but in a memory window at F000:0000–0FFF. A program's access to a standard port raises an NMI, and the handler in ROM carries it out in software. That is how ordinary IBM PC software runs on different hardware.</p>
+    <p>All versions share one principle. The Praktik has no 8259 interrupt controller (Soviet КР580ВН59) and no 8237 DMA controller (КР1810ВТ37). The other chips — 8255 (КР580ВВ55А), 8253 (КР580ВИ53), 6845 (КМ1809ВГ6), 765 (КР1810ВГ72А) and two 8250s (no direct Soviet equivalent) — are not on the standard IBM PC I/O ports but in a memory window at F000:0000–0FFF. A program's access to a standard port raises an NMI, and the handler in ROM carries it out in software. That is how ordinary IBM PC software runs on different hardware.</p>
     <p>The 16 KB ROM image is visible at FC000–FFFFF and in a mirror at F4000–F7FFF. The first 8 KB run as segment F400: the peripheral emulator, the common interrupt handler INT 0Fh and the upper half of the font. The second 8 KB are an ordinary BIOS with IBM PC/XT entry points. The full register and port map is on the <a href="praktik_bios_2.16-17_en.html#overview">2.16-17 page</a>.</p>
   </section>
 

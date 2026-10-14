@@ -17,7 +17,7 @@
 ;
 ; ## How this BIOS works
 ;
-; The Praktik lacks some of the standard IBM PC chips: there is no 8259 interrupt controller and no 8237 DMA controller. The other chips (8255, 8253, 6845, 765, two 8250s) are present, but they sit in a memory window at F000:0000–0FFF instead of on the standard I/O ports. When a program accesses a standard IBM PC port, the hardware traps the access and raises an NMI. The NMI handler in ROM works out which port was accessed and performs the access in software: it forwards it to the real chip, converts the values, or emulates the device entirely. That is why ordinary IBM PC software runs even though the hardware is different.
+; The Praktik lacks some of the standard IBM PC chips: there is no 8259 interrupt controller (Soviet КР580ВН59) and no 8237 DMA controller (КР1810ВТ37). The other chips — 8255 (КР580ВВ55А), 8253 (КР580ВИ53), 6845 (КМ1809ВГ6), 765 (КР1810ВГ72А) and two 8250s (no direct Soviet equivalent) — are present, but they sit in a memory window at F000:0000–0FFF instead of on the standard I/O ports. When a program accesses a standard IBM PC port, the hardware traps the access and raises an NMI. The NMI handler in ROM works out which port was accessed and performs the access in software: it forwards it to the real chip, converts the values, or emulates the device entirely. That is why ordinary IBM PC software runs even though the hardware is different.
 ;
 ; The BIOS consists of two 8 KB halves:
 ; - **First half (segment F400)** is the peripheral emulator: the NMI handler with its port table, the common hardware interrupt handler INT 0Fh, the port handlers, programmed-I/O floppy data transfer, and the upper half of the font (characters 80–FFh).

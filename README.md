@@ -21,7 +21,7 @@ Each folder contains the full 16 KB image and the two 8 KB ROM chips it is made 
 
 ## How the machine works
 
-The Praktik has no 8259 interrupt controller and no 8237 DMA controller. Its other chips (8255, 8253, 6845, 765 and two 8250s) are not on the standard IBM PC I/O ports but in a memory window at `F000:0000–0FFF`. When a program accesses a standard IBM PC port, the hardware traps the access and raises an NMI. The NMI handler in ROM performs the access in software: it forwards it to the real chip, rescales the values, or emulates a missing device entirely. This is how unmodified IBM PC software runs on different hardware.
+The Praktik has no 8259 interrupt controller (Soviet КР580ВН59) and no 8237 DMA controller (КР1810ВТ37). Its other chips — 8255 (КР580ВВ55А), 8253 (КР580ВИ53), 6845 (КМ1809ВГ6), 765 (КР1810ВГ72А) and two 8250s (no direct Soviet equivalent) — are not on the standard IBM PC I/O ports but in a memory window at `F000:0000–0FFF`. When a program accesses a standard IBM PC port, the hardware traps the access and raises an NMI. The NMI handler in ROM performs the access in software: it forwards it to the real chip, rescales the values, or emulates a missing device entirely. This is how unmodified IBM PC software runs on different hardware.
 
 The 16 KB ROM is visible at `FC000–FFFFF` and mirrored at `F4000–F7FFF`:
 
