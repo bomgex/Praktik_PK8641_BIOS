@@ -39,7 +39,7 @@ The `disasm/` folder holds a commented disassembly of every version: a comment o
 | 2.16-17 (architecture overview) | [`.html`](disasm/praktik_bios_2.16-17_en.html) · [`.asm`](disasm/praktik_bios_2.16-17_en.asm) | [`.html`](disasm/praktik_bios_2.16-17.html) · [`.asm`](disasm/praktik_bios_2.16-17.asm) |
 | 2.18-19_new | [`.html`](disasm/praktik_bios_2.18-19_new_en.html) · [`.asm`](disasm/praktik_bios_2.18-19_new_en.asm) | [`.html`](disasm/praktik_bios_2.18-19_new.html) · [`.asm`](disasm/praktik_bios_2.18-19_new.asm) |
 
-GitHub shows `.html` files as source code. To read them as pages, clone the repository and open `disasm/index_en.html` in a browser. The `.asm` files are plain text and read fine on GitHub.
+The HTML documentation is published on GitHub Pages: <https://bomgex.github.io/Praktik_PK8641_BIOS/index_en.html> (English) and <https://bomgex.github.io/Praktik_PK8641_BIOS/> (Ukrainian). It is rebuilt from `disasm/` on every push by `.github/workflows/pages.yml`. You can also clone the repository and open `disasm/index_en.html` locally. The `.asm` files are plain text and read fine on GitHub.
 
 In the comments, "probably" marks a conclusion drawn from the code that is not confirmed by documentation. On-screen BIOS messages are quoted in the original Russian with a translation.
 
