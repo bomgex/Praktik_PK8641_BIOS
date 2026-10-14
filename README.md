@@ -2,7 +2,7 @@
 
 **English** | [Українська](README.uk.md)
 
-BIOS ROM dumps and a fully commented disassembly of the **Praktik** (PK8641), a Soviet IBM PC/XT-compatible personal computer made by the "Magnit" plant in 1990, with later BIOS versions by C.S.T. (Computer & Soft Technol.), 1992.
+BIOS ROM dumps and a fully commented disassembly of the **Praktik** (PK8641), a Soviet IBM PC/XT-compatible personal computer made from 1990 by the Kaniv Electromechanical Plant "Magnit" (Kaniv, Cherkasy Oblast, Ukrainian SSR), with later BIOS versions by C.S.T. (Computer & Soft Technol.), 1992.
 
 > [!WARNING]
 > **The Praktik motherboard power connector looks like the standard IBM PC 5.25-inch floppy drive power connector, BUT(!) its pinout does not match the standard one.** Connecting a standard IBM PC power supply burns out the chips on the motherboard. Check the pinout before applying power.

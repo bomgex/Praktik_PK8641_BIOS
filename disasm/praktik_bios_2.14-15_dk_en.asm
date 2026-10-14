@@ -17,7 +17,7 @@
 ;
 ; ## Version 2.14-15_dk: the 1990 factory BIOS
 ;
-; The start of the main ROM (F000:E000) holds `00001 "МАГНИТ" 1990` ("MAGNIT" 1990), and the banner reads `ПЭВМ "Практик"` ("Praktik" PC). This is the earliest version available. The overall architecture is the same as in 2.16-17: ports trapped through the NMI, peripherals emulated in software, chips in the F000:0000–0FFF window. The emulator design and the set of devices differ. Lines identical to 2.16-17 carry the same comments; the differences are described below and in the procedure headers.
+; The start of the main ROM (F000:E000) holds `00001 "МАГНИТ" 1990` ("MAGNIT" 1990), and the banner reads `ПЭВМ "Практик"` ("Praktik" PC). This is the earliest version available: the factory BIOS of the Kaniv Electromechanical Plant "Magnit" (Kaniv, Cherkasy Oblast). The overall architecture is the same as in 2.16-17: ports trapped through the NMI, peripherals emulated in software, chips in the F000:0000–0FFF window. The emulator design and the set of devices differ. Lines identical to 2.16-17 carry the same comments; the differences are described below and in the procedure headers.
 ;
 ; ## NMI handler
 ;
